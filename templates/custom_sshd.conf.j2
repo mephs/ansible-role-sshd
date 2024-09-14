@@ -1,0 +1,21 @@
+#
+# {{ ansible_managed }}
+#
+
+{% macro render(option, value) -%}
+{% if value is sameas true -%}
+{{ option }} yes
+{% elif value is sameas false -%}
+{{ option }} no
+{% elif value is string or value is number -%}
+{{ option }} {{ value | string }}
+{% else -%}
+{% for v in value -%}
+{{ option }} {{ v | string }}
+{% endfor -%}
+{% endif -%}
+{%- endmacro %}
+
+{%- for option, value in item.value.items() %}
+{{ render(option, value) }}
+{%- endfor %}

@@ -1,0 +1,20 @@
+sshd_reload_service: true
+
+sshd_check_supported_options: true
+
+sshd_cleanup_enabled: false
+
+sshd_files: {}
+
+# sshd_files:
+#   20-authentification:
+#     PermitRootLogin: false
+#     PasswordAuthentication: true
+#   30-custom-ssh-port:
+#     Port: 2222
+
+sshd_binary: "{{ _sshd_binary }}"
+sshd_config_directory: "{{ _sshd_config_directory }}"
+sshd_config_owner: "{{ _sshd_config_owner }}"
+sshd_config_group: "{{ _sshd_config_group }}"
+sshd_config_mode: "{{ _sshd_config_mode }}"

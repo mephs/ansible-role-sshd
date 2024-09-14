@@ -1,2 +1,79 @@
----
-# vars file for sshd
+_sshd_binary: /usr/sbin/sshd
+_sshd_config_directory: /etc/ssh/sshd_config.d
+_sshd_config_owner: root
+_sshd_config_group: root
+_sshd_config_mode: "0600"
+
+_sshd_supported_options:
+  - AcceptEnv
+  - AddressFamily
+  - AllowAgentForwarding
+  - AllowGroups
+  - AllowStreamLocalForwarding
+  - AllowTcpForwarding
+  - AllowUsers
+  - AuthorizedKeysCommand
+  - AuthorizedKeysCommandUser
+  - AuthorizedKeysFile
+  - AuthorizedPrincipalsFile
+  - AuthenticationMethods
+  - Banner
+  - ChallengeResponseAuthentication
+  - ChrootDirectory
+  - ClientAliveCountMax
+  - ClientAliveInterval
+  - Compression
+  - Ciphers
+  - DenyGroups
+  - DenyUsers
+  - ForceCommand
+  - GSSAPIAuthentication
+  - GSSAPIEnablek5users
+  - GSSAPICleanupCredentials
+  - GSSAPIKeyExchange
+  - GSSAPIStrictAcceptorCheck
+  - GatewayPorts
+  - HostKey
+  - HostKeyAlgorithms
+  - HostbasedAuthentication
+  - IgnoreRhosts
+  - IgnoreUserKnownHosts
+  - KerberosAuthentication
+  - KerberosGetAFSToken
+  - KerberosOrLocalPasswd
+  - KerberosTicketCleanup
+  - KerberosUseKuserok
+  - KexAlgorithms
+  - KbdInteractiveAuthentication
+  - LegauthenticationMethods
+  - ListenAddress
+  - LogLevel
+  - LoginGraceTime
+  - MACs
+  - MaxAuthTries
+  - MaxSessions
+  - MaxStartups
+  - PermitEmptyPasswords
+  - PermitOpen
+  - PermitRootLogin
+  - PermitTTY
+  - PermitTunnel
+  - PermitUserEnvironment
+  - PermitUserRC
+  - PidFile
+  - Port
+  - PrintLastLog
+  - PrintMotd
+  - PubkeyAuthentication
+  - RekeyLimit
+  - StrictModes
+  - Subsystem
+  - SyslogFacility
+  - TCPKeepAlive
+  - UseDNS
+  - UsePAM
+  - UsePrivilegeSeparation
+  - VersionAddendum
+  - X11DisplayOffset
+  - X11Forwarding
+  - X11UseLocalhost
