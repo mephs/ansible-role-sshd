@@ -1,18 +1,34 @@
-# Role Name
+# sshd
 
-A brief description of the role goes here.
+This Ansible role helps you manage SSHD configurations on your servers easily and efficiently.
+
+All [sshd_config](<https://man.freebsd.org/cgi/man.cgi?sshd_config(5)>) options are supported.
+
+> [!WARNING]
+> Any changes to SSHD configuration can impact server access and security. Always test new configurations in a staging environment before applying them to production servers.
 
 ## Requirements
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+- Ansible 2.9 or higher
+- SSHD installed on target systems
 
 ## Role Variables
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+### sshd_files
+
+Primary variable, allows configure multiple sshd config files. Each entry in this variable represents a configuration file.
+
+### sshd_cleanup_enabled
+
+Set to `true` to cleanup old configuration files. The default is `false`.
+
+### sshd_reload_service
+
+Set to `false` to disable reload of the sshd service. The default is `true`.
 
 ## Dependencies
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+This role does not have any dependencies.
 
 ## Example Playbook
 
@@ -24,8 +40,8 @@ Including an example of how to use your role (for instance, with variables passe
 
 ## License
 
-BSD
+MIT
 
 ## Author Information
 
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+Created and maintained by Mikhail Vorontsov (@mephs) <mvorontsov@tuta.io>
