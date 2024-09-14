@@ -4,28 +4,20 @@ sshd_files: {}
 # Example
 # sshd_files:
 #   01-auth-configuration:
-#     PermitRootLogin: false
+#     PermitRootLogin: true
 #     PasswordAuthentication: false
-#     PermitEmptyPasswords: false
 #   02-custom-ciphers:
 #     Ciphers:
 #       - blowfish-cbc
 #       - aes256-gcm@openssh.com
 #   03-matches:
 #     Match:
-#       - criteria: Group
-#         value: foo
-#         keywords:
-#           PermitRootLogin without-password
 #       - criteria: Address
 #         value:
 #           - 192.0.2.0/24
 #           - 192.0.3.0/24
 #         keywords:
-#           MaxSessions: 3
-#           AllowUsers:
-#             - foo
-#             - bar
+#           AllowUsers: alice,bob
 
 # Clean up existing SSHD configuration files before applying new ones.
 sshd_cleanup_enabled: false
