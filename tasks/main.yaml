@@ -1,14 +1,3 @@
-- name: Check if all config options are supported
-  ansible.builtin.assert:
-    quiet: true
-    that:
-      - item.key in _sshd_supported_options
-    msg: Unsupported SSHD option '{{ item.key }}' found in the configuration
-  loop: "{{ sshd_files | dict2items | map(attribute='value') | combine | dict2items }}"
-  loop_control:
-    label: "{{ item.key }}"
-  when: sshd_check_supported_options
-
 - name: Find all config files in the directory
   ansible.builtin.find:
     paths: "{{ sshd_config_directory }}"
