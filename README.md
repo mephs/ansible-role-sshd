@@ -8,7 +8,7 @@ All [sshd_config](<https://man.freebsd.org/cgi/man.cgi?sshd_config(5)>) options 
 > Any changes to SSHD configuration can impact server access and security. Always test new configurations in a staging environment before applying them to production servers.
 
 > [!IMPORTANT]
-> This role does not configure the firewall or selinux, so if you don't want to lose access to your server, use other roles to achieve it.
+> This role does not configure the firewall or SELinux. To prevent losing access to your server, ensure you use additional roles for firewall and SELinux configurations.
 
 ## Requirements
 
@@ -19,7 +19,7 @@ All [sshd_config](<https://man.freebsd.org/cgi/man.cgi?sshd_config(5)>) options 
 
 ### sshd_files
 
-Primary variable, allows configure multiple sshd config files. Each entry in this variable represents a configuration file.
+Primary variable for configuring multiple SSHD config files. Each entry in this variable represents a configuration file.
 
 Keyword values `yes` and `no` are used as Ansible boolean values.
 
@@ -33,14 +33,14 @@ sshd_files:
       - ::
 ```
 
-This will be templated in:
+This will be templated as:
 
 ```conf
 ListenAddress 0.0.0.0
 ListenAddress ::
 ```
 
-If keyword values must be separated by a comma, you can specify them as a list or string.
+If keyword values need to be separated by a comma, specify them as a list or string.
 
 ```yaml
 sshd_files:
@@ -52,7 +52,7 @@ sshd_files:
     HostKeyAlgorithms: ssh-ed25519,rsa-sha2-512,rsa-sha2-256
 ```
 
-This will be templated in:
+This will be templated as:
 
 ```conf
 Ciphers aes256-ctr,aes256-gcm@openssh.com,chacha20-poly1305@openssh.com
@@ -78,7 +78,7 @@ sshd_files:
           PasswordAuthentication: true
 ```
 
-This will be templated in:
+This will be templated as:
 
 ```conf
 Match Address 192.0.2.0/24,192.0.3.0/24
