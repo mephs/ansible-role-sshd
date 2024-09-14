@@ -1,0 +1,35 @@
+{{ ansible_managed | comment }}
+
+{% macro render_value(keyword, value) -%}
+{% if value is sameas true -%}
+{{ keyword }} yes
+{% elif value is sameas false -%}
+{{ keyword }} no
+{% elif keyword in _sshd_comma_separated_keywords and value is not string -%}
+{{ keyword }} {{ value | join(',') }}
+{% elif value is string or value is number -%}
+{{ keyword }} {{ value }}
+{% else -%}
+{% for val in value -%}
+{{ keyword }} {{ val }}
+{% endfor -%}
+{% endif -%}
+{%- endmacro %}
+
+{%- for keyword, value in item.value.items() -%}
+{% if keyword == "Match" %}
+{% for match_item in value %}
+
+{% if match_item.value is string -%}
+{{ keyword }} {{ match_item.criteria }} {{ match_item.value }}
+{% else -%}
+{{ keyword }} {{ match_item.criteria }} {{ match_item.value | join(',') }}
+{% endif -%}
+{% for k, v in match_item.keywords.items() %}
+    {{ render_value(k, v) -}}
+{% endfor %}
+{% endfor -%}
+{% else -%}
+{{ render_value(keyword, value) -}}
+{% endif -%}
+{%- endfor %}

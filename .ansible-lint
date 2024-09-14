@@ -1,0 +1,5 @@
+exclude_paths:
+  - .ansible-lint
+  - .yamlfmt
+
+use_default_rules: true

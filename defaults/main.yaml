@@ -1,0 +1,33 @@
+# Defines the SSHD configuration files to be managed.
+sshd_files: {}
+
+# Example
+# sshd_files:
+#   01-auth-configuration:
+#     PermitRootLogin: true
+#     PasswordAuthentication: false
+#   02-custom-ciphers:
+#     Ciphers:
+#       - blowfish-cbc
+#       - aes256-gcm@openssh.com
+#   03-matches:
+#     Match:
+#       - criteria: Address
+#         value:
+#           - 192.0.2.0/24
+#           - 192.0.3.0/24
+#         keywords:
+#           AllowUsers: alice,bob
+
+# Clean up existing SSHD configuration files before applying new ones.
+sshd_cleanup_enabled: false
+
+# Reload the SSHD service after making changes.
+sshd_reload_service: true
+
+# Override variables. Use with caution at your own risk.
+sshd_binary: "{{ _sshd_binary }}"
+sshd_config_directory: "{{ _sshd_config_directory }}"
+sshd_config_owner: "{{ _sshd_config_owner }}"
+sshd_config_group: "{{ _sshd_config_group }}"
+sshd_config_mode: "{{ _sshd_config_mode }}"

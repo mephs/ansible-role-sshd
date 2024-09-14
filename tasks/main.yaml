@@ -1,0 +1,28 @@
+- name: Find all config files in the directory
+  ansible.builtin.find:
+    paths: "{{ sshd_config_directory }}"
+    patterns: "*.conf"
+  register: __conf_files
+  when: sshd_cleanup_enabled
+
+- name: Deleting found config files
+  ansible.builtin.file:
+    path: "{{ item.path }}"
+    state: absent
+  loop: "{{ __conf_files.files }}"
+  loop_control:
+    label: "{{ item.path | basename }}"
+  when: sshd_cleanup_enabled
+
+- name: Template SSHD config
+  ansible.builtin.template:
+    src: custom_sshd.conf.j2
+    dest: "{{ sshd_config_directory }}/{{ item.key }}.conf"
+    owner: "{{ sshd_config_owner }}"
+    group: "{{ sshd_config_group }}"
+    mode: "{{ sshd_config_mode }}"
+    validate: "{{ sshd_binary }} -t -f %s"
+  loop: "{{ sshd_files | dict2items }}"
+  loop_control:
+    label: "{{ item.key }}"
+  notify: Reload SSH service

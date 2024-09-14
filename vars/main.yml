@@ -1,2 +1,21 @@
----
-# vars file for sshd
+_sshd_binary: /usr/sbin/sshd
+_sshd_config_directory: /etc/ssh/sshd_config.d
+_sshd_config_owner: root
+_sshd_config_group: root
+_sshd_config_mode: "0600"
+
+_sshd_comma_separated_keywords:
+  - AllowGroups
+  - AllowUsers
+  - AuthenticationMethods
+  - CASignatureAlgorithms
+  - Ciphers
+  - DenyGroups
+  - DenyUsers
+  - HostbasedAcceptedAlgorithms
+  - HostKeyAlgorithms
+  - KexAlgorithms
+  - LogVerbose
+  - MACs
+  - PubkeyAcceptedAlgorithms
+  - PubkeyAcceptedKeyTypes
