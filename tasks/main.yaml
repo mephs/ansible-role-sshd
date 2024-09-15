@@ -5,14 +5,16 @@
   register: __conf_files
   when: sshd_cleanup_enabled
 
-- name: Deleting found config files
+- name: Remove non-managed config files
   ansible.builtin.file:
     path: "{{ item.path }}"
     state: absent
   loop: "{{ __conf_files.files }}"
   loop_control:
     label: "{{ item.path | basename }}"
-  when: sshd_cleanup_enabled
+  when:
+    - sshd_cleanup_enabled
+    - (item.path | basename | splitext | first) not in sshd_files
 
 - name: Template SSHD config
   ansible.builtin.template:
