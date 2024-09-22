@@ -1,6 +1,14 @@
-- name: Find all config files in the directory
+- name: Ensure sshd_config.d directory exists
+  ansible.builtin.file:
+    path: "{{ sshd_configd_directory }}"
+    state: directory
+    owner: "{{ sshd_configd_owner }}"
+    group: "{{ sshd_configd_group }}"
+    mode: "{{ sshd_configd_mode }}"
+
+- name: Find all config files in the sshd_config.d
   ansible.builtin.find:
-    paths: "{{ sshd_config_directory }}"
+    paths: "{{ sshd_configd_directory }}"
     patterns: "*.conf"
   register: __conf_files
   when: sshd_cleanup_enabled
@@ -14,17 +22,17 @@
     label: "{{ item.path | basename }}"
   when:
     - sshd_cleanup_enabled
-    - (item.path | basename | splitext | first) not in sshd_files
+    - (item.path | basename | splitext | first) not in sshd_configd_files
 
-- name: Template SSHD config
+- name: Template SSHD config files in sshd_config.d
   ansible.builtin.template:
     src: custom_sshd.conf.j2
-    dest: "{{ sshd_config_directory }}/{{ item.key }}.conf"
-    owner: "{{ sshd_config_owner }}"
-    group: "{{ sshd_config_group }}"
-    mode: "{{ sshd_config_mode }}"
+    dest: "{{ sshd_configd_directory }}/{{ item.key }}.conf"
+    owner: "{{ sshd_configd_files_owner }}"
+    group: "{{ sshd_configd_files_group }}"
+    mode: "{{ sshd_configd_files_mode }}"
     validate: "{{ sshd_binary }} -t -f %s"
-  loop: "{{ sshd_files | dict2items }}"
+  loop: "{{ sshd_configd_files | dict2items }}"
   loop_control:
     label: "{{ item.key }}"
   notify: Reload SSH service
