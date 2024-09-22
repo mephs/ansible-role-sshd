@@ -17,7 +17,11 @@ All [sshd_config](<https://man.freebsd.org/cgi/man.cgi?sshd_config(5)>) options 
 
 ## Role Variables
 
-### sshd_files
+### sshd_reload_service
+
+Set to `false` to disable reload of the sshd service. The default is `true`.
+
+### sshd_configd_files
 
 Primary variable for configuring multiple SSHD config files. Each entry in this variable represents a configuration file.
 
@@ -26,7 +30,7 @@ Keyword values `yes` and `no` are used as Ansible boolean values.
 You can specify a list of keyword values to create multiple lines for the same keyword.
 
 ```yaml
-sshd_files:
+sshd_configd_files:
   00-example:
     ListenAddress:
       - 0.0.0.0
@@ -43,7 +47,7 @@ ListenAddress ::
 If keyword values need to be separated by a comma, specify them as a list or string.
 
 ```yaml
-sshd_files:
+sshd_configd_files:
   00-example:
     Ciphers:
       - aes256-ctr
@@ -62,7 +66,7 @@ HostKeyAlgorithms ssh-ed25519,rsa-sha2-512,rsa-sha2-256
 To use the `Match` block, format it as shown below. You can provide a list for the `value` field if you want the result to be a comma-separated string.
 
 ```yaml
-sshd_files:
+sshd_configd_files:
   00-example:
     Match:
       - criteria: Address
@@ -89,13 +93,9 @@ Match Group admins
   PasswordAuthentication yes
 ```
 
-### sshd_cleanup_enabled
+### sshd_configd_cleanup_enabled
 
-Set to `true` to cleanup old configuration files. The default is `false`.
-
-### sshd_reload_service
-
-Set to `false` to disable reload of the sshd service. The default is `true`.
+Set to `true` to cleanup old configuration files in the `sshd_config.d` directory. The default is `false`.
 
 ## Dependencies
 
@@ -108,7 +108,7 @@ This role does not have any dependencies.
   become: true
   gather_facts: false
   vars:
-    sshd_files:
+    sshd_configd_files:
       10-basic-settings:
         PermitRootLogin: false
         PasswordAuthentication: true

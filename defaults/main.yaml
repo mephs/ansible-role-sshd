@@ -1,8 +1,11 @@
+# Reload the SSHD service after making changes.
+sshd_reload_service: true
+
 # Defines the SSHD configuration files to be managed.
-sshd_files: {}
+sshd_configd_files: {}
 
 # Example
-# sshd_files:
+# sshd_configd_files:
 #   01-auth-configuration:
 #     PermitRootLogin: true
 #     PasswordAuthentication: false
@@ -20,14 +23,14 @@ sshd_files: {}
 #           AllowUsers: alice,bob
 
 # Clean up existing SSHD configuration files before applying new ones.
-sshd_cleanup_enabled: false
+sshd_configd_cleanup_enabled: false
 
-# Reload the SSHD service after making changes.
-sshd_reload_service: true
-
-# Override variables. Use with caution at your own risk.
+# Overrides variables. Use with caution at your own risk.
 sshd_binary: "{{ _sshd_binary }}"
-sshd_config_directory: "{{ _sshd_config_directory }}"
-sshd_config_owner: "{{ _sshd_config_owner }}"
-sshd_config_group: "{{ _sshd_config_group }}"
-sshd_config_mode: "{{ _sshd_config_mode }}"
+sshd_configd_directory: "{{ _sshd_configd_directory }}"
+sshd_configd_owner: "{{ _sshd_configd_owner }}"
+sshd_configd_group: "{{ _sshd_configd_group }}"
+sshd_configd_mode: "{{ _sshd_configd_mode }}"
+sshd_configd_files_owner: "{{ _sshd_configd_files_owner }}"
+sshd_configd_files_group: "{{ _sshd_configd_files_group }}"
+sshd_configd_files_mode: "{{ _sshd_configd_files_mode }}"
